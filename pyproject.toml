@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "sldy"
+version = "0.1.0"
+description = "A library for reading 3I Slidebook images."
+authors = ["Your Name <you@example.com>"]
+license = "BSD-3"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+numpy = "^2.1.1"
+pyyaml = "^6.0.2"
+pyzstd = "^0.16.1"
+
+
+[tool.poetry.group.dev-extra.dependencies]
+ipdb = {version = "^0.13.13", optional = true}
+ipython = {version = "^8.27.0", optional = true}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

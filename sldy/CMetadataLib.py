@@ -1,9 +1,11 @@
 __copyright__  = "Copyright (c) 2022, Intelligent Imaging Innovations, Inc. All rights reserved.  All rights reserved."
 __license__  = "This source code is licensed under the BSD-style license found in the LICENSE file in the root directory of this source tree."
 
-from BaseDecoder import BaseDecoder
-from CSBPoint import CSBPoint
 import yaml
+
+from sldy.BaseDecoder import BaseDecoder
+from sldy.CSBPoint import CSBPoint
+
 
 class CAlignManipRecord70(BaseDecoder):
     """ generated source for class CAlignManipRecord70 """
@@ -16,6 +18,7 @@ class CAlignManipRecord70(BaseDecoder):
         self.mXOffset = float()
         self.mYOffset = float()
         self.mZOffset = float()
+
 
 class CAnnotation70(BaseDecoder):
     """ generated source for class CAnnotation70 """

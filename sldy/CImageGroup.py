@@ -1,15 +1,17 @@
 __copyright__  = "Copyright (c) 2022, Intelligent Imaging Innovations, Inc. All rights reserved.  All rights reserved."
 __license__  = "This source code is licensed under the BSD-style license found in the LICENSE file in the root directory of this source tree."
 
-from BaseDecoder import BaseDecoder
-from CMetadataLib import *
-from CNpyHeader import *
-from CSBFile70 import *
-from CCompressionBase import *
-from CSBPoint import *
 import os
+
 import yaml
 import numpy as np
+
+from sldy.BaseDecoder import BaseDecoder
+from sldy.CMetadataLib import *
+from sldy.CNpyHeader import *
+from sldy.CSBFile70 import *
+from sldy.CCompressionBase import *
+from sldy.CSBPoint import *
 
 class CMaskPositions(object):
     mCompressedSizes = []

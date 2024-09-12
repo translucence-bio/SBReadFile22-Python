@@ -1,12 +1,13 @@
 __copyright__  = "Copyright (c) 2022, Intelligent Imaging Innovations, Inc. All rights reserved.  All rights reserved."
 __license__  = "This source code is licensed under the BSD-style license found in the LICENSE file in the root directory of this source tree."
 
-#Help obtained with the command:
-#python -c "import SBReadFile ; help(SBReadFile)" > help.txt
-`
-from DataLoader import *
-from CImageGroup import *
+# Help obtained with the command:
+# python -c "import SBReadFile ; help(SBReadFile)" > help.txt
+
 from enum import Enum
+
+from sldy.DataLoader import *
+from sldy.CImageGroup import *
 
 
 class EROI_Shapes(Enum):

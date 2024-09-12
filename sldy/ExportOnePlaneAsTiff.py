@@ -22,11 +22,15 @@ conda activate Slidebook
 conda install -n SlideBook python=3.8.5 tifffile
 """
 
-from SBReadFile import *
-from matplotlib import pyplot as plt
+import sys
+import getopt
+
 import numpy as np
-import sys, getopt
 import tifffile as tiff
+from matplotlib import pyplot as plt
+
+from sldy.SBReadFile import *
+
 
 def usage():
     print ('usage: python ExportOnePlaneAsTiff.py -i <sldy input_file> -l')

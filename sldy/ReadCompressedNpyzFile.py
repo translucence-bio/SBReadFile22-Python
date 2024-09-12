@@ -1,11 +1,15 @@
 __copyright__  = "Copyright (c) 2022, Intelligent Imaging Innovations, Inc. All rights reserved.  All rights reserved."
 __license__  = "This source code is licensed under the BSD-style license found in the LICENSE file in the root directory of this source tree."
 
-from CNpyHeader import *
-from CCompressionBase import *
-from matplotlib import pyplot as plt
+import sys
+import getopt
+
 import numpy as np
-import sys, getopt
+from matplotlib import pyplot as plt
+
+from sldy.CNpyHeader import *
+from sldy.CCompressionBase import *
+
 
 def main(argv):
     # change it to use your file
