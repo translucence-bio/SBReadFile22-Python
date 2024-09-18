@@ -1,0 +1,74 @@
+name: Tag and Publish
+
+on:
+  push:
+    branches:
+    - main
+    paths-ignore:
+    - 'README.md'
+
+env:
+  AWS_DEFAULT_REGION: us-west-2
+  AWS_DOMAIN: production
+  AWS_REPOSITORY: pypi
+  POETRY_VIRTUALENVS_IN_PROJECT: true
+
+jobs:
+  bump-version:
+    name: Bump Version
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    name: Publish
+    runs-on: [self-hosted, ubuntu-20.04]
+    needs: bump-version
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+
+    - name: Configure CPPFLAGS
+      run: echo CPPFLAGS=-I$(python3 -c "from sysconfig import get_paths as gp; print(gp()['include'])") >> $GITHUB_ENV
+
+    - name: Install Poetry
+      uses: pronovic/setup-poetry@v1
+      with:
+        version: 1.7.1
+        plugins: "poetry-dynamic-versioning[plugin],poetry-codeartifact-login"
+        cache-venv: "true"
+
+    - name: Configure AWS credentials
+      run: cat /mnt/store/tools/secrets/runner-aws-credentials.env >> $GITHUB_ENV
+
+    - name: Log in to CodeArtifact
+      run: poetry aws-login aws-production
+
+    - name: Install Python dependencies
+      run: poetry install
+
+    - name: Build
+      run: poetry build --format sdist
+
+    - name: Publish to CodeArtifact
+      run: |
+        python3 -m pip install twine
+        aws codeartifact login --tool twine --domain ${{ env.AWS_DOMAIN }} --repository ${{ env.AWS_REPOSITORY }}
+        python3 -m twine upload --repository codeartifact dist/*
+

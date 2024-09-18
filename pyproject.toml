@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "sldy"
-version = "0.1.0"
+version = "0.0.0"
 description = "A library for reading 3I Slidebook images."
 authors = ["Your Name <you@example.com>"]
 license = "BSD-3"
 readme = "README.md"
+exclude = ["sldy/**/test*"]
 
 [tool.poetry.dependencies]
 python = ">=3.10"
@@ -13,9 +14,18 @@ pyyaml = "^6.0.2"
 zstandard = "^0.22.0"
 
 [tool.poetry.group.dev-extra.dependencies]
-ipdb = {version = "^0.13.13", optional = true}
-ipython = {version = "^8.27.0", optional = true}
+ipdb = "^0.13.13"
+ipython = "^8.27.0"
+
+[tool.poetry.group.dev-extra]
+optional = true
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
+pattern = '(?x)^v?((?P<epoch>\d+)!)?(?P<base>\d+(\.\d+)*)([-._]?((?P<stage>[a-zA-Z]+)[-._]?(?P<revision>\d+)?))?(\+(?P<tagged_metadata>.+))?$'
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
