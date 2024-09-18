@@ -8,10 +8,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10"
-numpy = "^2.1.1"
+numpy = "^1.26.3"
 pyyaml = "^6.0.2"
-pyzstd = "^0.16.1"
-
+zstandard = "^0.22.0"
 
 [tool.poetry.group.dev-extra.dependencies]
 ipdb = {version = "^0.13.13", optional = true}

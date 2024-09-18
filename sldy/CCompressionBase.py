@@ -1,7 +1,7 @@
 __copyright__  = "Copyright (c) 2022, Intelligent Imaging Innovations, Inc. All rights reserved.  All rights reserved."
 __license__  = "This source code is licensed under the BSD-style license found in the LICENSE file in the root directory of this source tree."
 
-import pyzstd 
+import zstandard
 import numpy as np
 
 class CCompressionBase(object):
@@ -72,7 +72,7 @@ class CCompressionBase(object):
 
     def DecompressBuffer(self,inBuffer):
         if self.mAlgorythm == self.eCompressionZstd:
-            theDecompressedBuf = pyzstd.decompress(inBuffer)
+            theDecompressedBuf = zstandard.decompress(inBuffer)
             return theDecompressedBuf
         elif self.mAlgorythm == self.eCompressionRLE:
             theUncompressedSize = int(self.mDataLenBY/self.mUint16Size)
